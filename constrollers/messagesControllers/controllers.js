@@ -46,6 +46,7 @@ class Messages {
             res.status(500).json({ err: 'Server Error' })
         }
     }
+
     static async messageUpdate(req, res) {
         try {
             let message = await Message.findByIdAndUpdate(req.body.id, { updatedAt: new Date, text: req.body.text })//find message by id and update it 
