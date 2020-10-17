@@ -6,10 +6,8 @@ const validateMessage = require('../../validators/messageValidator')
 class Messages {
     static async messageListNumber(req, res) {
         try {
-            let messages = await Message.find({}).limit(10 * (req.params.number+1))//get first 10*number messages
-            if (messages.length > 10) {
-                messages = messages.slice(messages.length - 10)
-            }
+            let messages = await Message.find().skip(10*req.params.number).limit(10)//get first 10*number messages
+            console.log(messages)
             res.status(200).json(messages)
         } catch (e) {
             res.status(500).json({ err: "Server error" })
