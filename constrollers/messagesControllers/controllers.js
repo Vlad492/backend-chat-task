@@ -6,8 +6,8 @@ const validateMessage = require('../../validators/messageValidator')
 class Messages {
     static async messageListNumber(req, res) {
         try {
-            let messages = await Message.find({}).limit(10 * (req.params.number+1))//get first 10* number messages
-            if (messages.length > 10) {//if length > 10  ---> return last 10 messages
+            let messages = await Message.find({}).limit(10 * (req.params.number+1))//get first 10*number messages
+            if (messages.length > 10) {
                 messages = messages.slice(messages.length - 10)
             }
             res.status(200).json(messages)
@@ -28,10 +28,10 @@ class Messages {
             if (validateEmail(req.body.email)) {
                 if (validateMessage(req.body.text)) {
                     let user = await User.find(req.body.email)//check user in users collection by email
-                    if (user) {//if user exist add field name to body
+                    if (user) {//if user exist --> add field name to body
                         req.body.name = user
                     }
-                    let message = await Message.create(req.body)//create new message
+                    let message = await Message.create(req.body)
                     await message.save()
                     res.sendStatus(201)
                 } else {
@@ -46,21 +46,12 @@ class Messages {
             res.status(500).json({ err: 'Server Error' })
         }
     }
-    static async messageAddToDbBySocket(msg) {//add messages created by socket connection
-        try {
-            let message = await Message.create(msg)//add message to db
-            message.save()
-            return message //return message
-        } catch (e) {
-            return false
-        }
-    }
     static async messageUpdate(req, res) {
         try {
             let message = await Message.findByIdAndUpdate(req.body.id, { updatedAt: new Date, text: req.body.text })//find message by id and update it 
-            if (message) {//if message found
+            if (message) {
                 res.sendStatus(201)
-            } else {//message not found
+            } else {
                 res.status(404).json({err: 'Message not found' })
             }
         } catch (e) {
