@@ -6,9 +6,12 @@ const validateMessage = require('../../validators/messageValidator')
 class Messages {
     static async messageListNumber(req, res) {
         try {
-            let messages = await Message.find({}).limit(10 * req.params.number+1)//get first 10* number messages
+            let messages = await Message.find({}).limit(10 * (req.params.number+1))//get first 10* number messages
             if (messages.length > 10) {//if length > 10  ---> return last 10 messages
-                messages = messages.slice(0, messages.length - 10)
+                console.log(messages)
+                console.log(messages.length)
+                messages = messages.slice(messages.length - 10)
+                console.log(messages)
             }
             res.status(200).json(messages)
         } catch (e) {
@@ -25,7 +28,6 @@ class Messages {
         }
     }
     static async messageCreate(req, res) {
-        console.log(validateEmail(req.body.email))
         try {
             if (validateEmail(req.body.email)) {
                 if (validateMessage(req.body.text)) {
