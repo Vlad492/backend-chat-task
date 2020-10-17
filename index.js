@@ -6,7 +6,6 @@ const PORT = process.env.PORT || config.PORT
 const mongoose = require('mongoose')
 const router = require('./router/router')
 const io = require('socket.io')(http);
-const Messages = require('./constrollers/messagesControllers/controllers')
 const Message = require('./models/messageModel/MessageModel')
 
 
