@@ -1,6 +1,6 @@
 Heroku deploy : https://job-task-messenger.herokuapp.com
 
-AWS deploy : http://jobtaskmessenger-env.eba-2jd7kmxc.eu-central-1.elasticbeanstalk.com
+AWS deploy : http://jobtaskmessenger-env-2.eba-2jd7kmxc.eu-central-1.elasticbeanstalk.com
 
 Documentation : https://www.getpostman.com/collections/bf8b07920e923719cf62
 
