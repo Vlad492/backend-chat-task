@@ -15,16 +15,16 @@ class Messages {
             }
             res.status(200).json(messages)
         } catch (e) {
-            res.status(404).json({ msg: "Something went wrong" })
+            res.status(500).json({ err: "Server error" })
         }
     }
     static async messageSingleId(req, res) {
         try {
-            let message = await Message.findById(req.params.id)//find message by id
-            res.status(201).json(message)
+            let message = await Message.findById(req.params.id)
+            res.status(200).json(message)
         } catch (e) {
             console.log(e)
-            res.status(404).json({ found: false })
+            res.status(404).json({ err: "Message not found" })
         }
     }
     static async messageCreate(req, res) {
@@ -37,18 +37,18 @@ class Messages {
                     }
                     let message = await Message.create(req.body)//create new message
                     await message.save()
-                    res.status(201).json({ added: true })
+                    res.sendStatus(201)
                 } else {
-                    res.json({ added: false, msg: 'invalid text' })
+                    res.status(404).json({ err: 'Invalid text' })
                 }
             } else {
-                res.json({ added: false, msg: 'invalid email' })
+                res.status(404).json({ err: 'Invalid email' })
             }
 
 
         } catch (e) {
             console.log(e)
-            res.json({ added: false, msg: 'something went wrong' })
+            res.status(500).json({ err: 'Server Error' })
         }
     }
     static async messageAddToDbBySocket(msg) {//add messages created by socket connection
@@ -62,16 +62,15 @@ class Messages {
         }
     }
     static async messageUpdate(req, res) {
-        console.log(req.body)
         try {
             let message = await Message.findByIdAndUpdate(req.body.id, { updatedAt: new Date, text: req.body.text })//find message by id and update it 
             if (message) {//if message found
                 res.status(201).json({ updated: true })
             } else {//message not found
-                res.status(404).json({ updated: false, msg: 'Message not found' })
+                res.status(404).json({err: 'Message not found' })
             }
         } catch (e) {
-            res.status(404).json({ updated: false, msg: 'Something went wrong' })
+            res.status(500).json({ err: 'Server error' })
         }
 
     }

@@ -1,4 +1,4 @@
-const exp = new RegExp("^.{1,1000}$") 
+const exp = new RegExp("^.{1,100}$") 
 
 module.exports = function(msg){
     return exp.test(msg)
