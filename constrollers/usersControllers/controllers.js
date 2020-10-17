@@ -5,14 +5,14 @@ class Users{
     static async create(req,res){
         if (validateEmail(req.body.email)) {
         try{
-            await User.create(req.body)//create a new user
-            res.status(201).json({added: true})
+            await User.create(req.body)
+            res.sendStatus(201)
         }catch(e){
             console.log(e)
-            res.status(403).json({added : false, msg : 'Something get wrong'})
+            res.status(500).json({ err : 'Server Eror'})
         }}
         else{
-            res.status(403).json({added : false, msg : 'Invalid email'})
+            res.status(403).json({ err : 'Invalid email'})
         }
     }
     static async find(email){
@@ -24,7 +24,7 @@ class Users{
                return false
            }
         }catch(e){
-            console.log(e)
+            return false
         }
     }
 }

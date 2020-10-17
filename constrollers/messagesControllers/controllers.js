@@ -23,7 +23,6 @@ class Messages {
             let message = await Message.findById(req.params.id)
             res.status(200).json(message)
         } catch (e) {
-            console.log(e)
             res.status(404).json({ err: "Message not found" })
         }
     }
@@ -47,7 +46,6 @@ class Messages {
 
 
         } catch (e) {
-            console.log(e)
             res.status(500).json({ err: 'Server Error' })
         }
     }
@@ -57,7 +55,6 @@ class Messages {
             message.save()
             return message //return message
         } catch (e) {
-            console.log(e)
             return false
         }
     }
@@ -65,7 +62,7 @@ class Messages {
         try {
             let message = await Message.findByIdAndUpdate(req.body.id, { updatedAt: new Date, text: req.body.text })//find message by id and update it 
             if (message) {//if message found
-                res.status(201).json({ updated: true })
+                res.sendStatus(201)
             } else {//message not found
                 res.status(404).json({err: 'Message not found' })
             }
