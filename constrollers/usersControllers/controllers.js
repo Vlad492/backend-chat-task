@@ -1,9 +1,9 @@
 const User = require('../../models/userModel/UserModel')
-const validateEmail = require('email-validator')
+const validateEmail = require('../validators/emailValidator')
 
 class Users{
     static async create(req,res){
-        if (validateEmail.validate(req.body.email)) {
+        if (validateEmail(req.body.email)) {
         try{
             await User.create(req.body)//create a new user
             res.status(201).json({added: true})
