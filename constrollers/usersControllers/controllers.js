@@ -17,7 +17,7 @@ class Users{
     }
     static async find(email){
         try{
-           let user = await User.findOne({email})//find user my email
+           let user = await User.findOne({email})
            if(user){
                return user.name
            }else{
