@@ -8,10 +8,7 @@ class Messages {
         try {
             let messages = await Message.find({}).limit(10 * (req.params.number+1))//get first 10* number messages
             if (messages.length > 10) {//if length > 10  ---> return last 10 messages
-                console.log(messages)
-                console.log(messages.length)
                 messages = messages.slice(messages.length - 10)
-                console.log(messages)
             }
             res.status(200).json(messages)
         } catch (e) {
