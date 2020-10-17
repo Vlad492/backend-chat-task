@@ -1,4 +1,0 @@
-{
-    "PORT" : 8000,
-    "CONNECTION_URL" : "mongodb://vlad:vlad@localhost:27017/messanger"
-}

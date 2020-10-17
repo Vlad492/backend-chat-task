@@ -1,7 +1,7 @@
 const Message = require('../../models/messageModel/MessageModel')
 const User = require('../usersControllers/controllers')
-const validateEmail = require('../validators/emailValidator')
-const validateMessage = require('../validators/messageValidator')
+const validateEmail = require('../../validators/emailValidator')
+const validateMessage = require('../../validators/messageValidator')
 
 class Messages {
     static async messageListNumber(req, res) {
@@ -25,6 +25,7 @@ class Messages {
         }
     }
     static async messageCreate(req, res) {
+        console.log(validateEmail(req.body.email))
         try {
             if (validateEmail(req.body.email)) {
                 if (validateMessage(req.body.text)) {

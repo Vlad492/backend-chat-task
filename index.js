@@ -1,18 +1,19 @@
 const express = require('express')
 const app = express()
-const config = require('./configs/config.json')
+require('dotenv').config()
 const http = require('http').createServer(app)
-const PORT = process.env.PORT || config.PORT
+const port = process.env.PORT
 const mongoose = require('mongoose')
-const router = require('./router/router')
+const router = require('./router/index')
 const io = require('socket.io')(http);
 const Message = require('./models/messageModel/MessageModel')
 
 
 
+
 const start = async () => {//Start server and connect to MongoDB
-    http.listen(PORT, console.log(`Server has been started on ${PORT} port`))
-    await mongoose.connect(config.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }).then(() => console.log("MongoDB has been connected"))
+    http.listen(port, console.log(`Server has been started on ${port} port`))
+    await mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }).then(() => console.log("MongoDB has been connected"))
 }
 
 app.get('/api/messages/list/:number', router)//get messages
