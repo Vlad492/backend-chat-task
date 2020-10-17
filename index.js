@@ -13,7 +13,7 @@ const start = async () => {//Start server and connect to MongoDB
 app.get('/api/messages/list/:number', router)//get messages
 app.get('/api/messages/single/:id', router)//get message By id
 app.post('/api/messages/create', router)//create message
-app.put('/api/messages/update', router)//update message by id
+app.put('/api/messages/update', router)//update message By id
 app.post('/api/users/create', router)//create user
 
 
