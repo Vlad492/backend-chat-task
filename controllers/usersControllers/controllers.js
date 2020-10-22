@@ -8,7 +8,6 @@ class Users{
             await User.create(req.body);
             res.sendStatus(201);
         }catch(e){
-            console.log(e);
             res.status(500).json({ err : 'Server Eror'});
         }}
         else{
