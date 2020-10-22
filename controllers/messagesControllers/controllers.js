@@ -1,7 +1,7 @@
 const Message = require('../../models/messageModel/MessageModel');
 const User = require('../usersControllers/controllers');
-const validateEmail = require('../../validators/emailValidator');
-const validateMessage = require('../../validators/messageValidator');
+const validateEmail = require('../../models/validators/emailValidator');
+const validateMessage = require('../../models/validators/messageValidator');
 
 class Messages {
     static async messageListNumber(req, res) {

@@ -1,5 +1,5 @@
 const User = require('../../models/userModel/UserModel');
-const validateEmail = require('../../validators/emailValidator');
+const validateEmail = require('../../models/validators/emailValidator');
 
 class Users{
     static async create(req,res){
