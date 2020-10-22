@@ -7,7 +7,6 @@ class Messages {
     static async messageListNumber(req, res) {
         try {
             let messages = await Message.find().skip(10*req.params.number).limit(10);//get first 10*number messages
-            console.log(messages);
             res.status(200).json(messages);
         } catch (e) {
             res.status(500).json({ err: "Server error" });
